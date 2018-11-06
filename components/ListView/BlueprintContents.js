@@ -60,7 +60,7 @@ class BlueprintContents extends React.Component {
                 {this.props.children}
               </div>
               ||
-              <Tabs id="blueprint-tabs">
+              <Tabs id="basic-tabs-pf">
                 <Tab
                   eventKey="selected-components"
                   title={<LabelWithBadge title={formatMessage(messages.selectedTabTitle)} badge={components.length} />}
@@ -71,7 +71,7 @@ class BlueprintContents extends React.Component {
                       message={formatMessage(messages.emptyStateNoResultsMessage)}
                     >
                       <button
-                        className="btn btn-link btn-lg"
+                        className="nav nav-tabs nav-tabs-pf"
                         type="button"
                         onClick={() => filterClearValues([])}
                       >
@@ -103,7 +103,7 @@ class BlueprintContents extends React.Component {
                       message={formatMessage(messages.emptyStateNoResultsMessage)}
                     >
                       <button
-                        className="btn btn-link btn-lg"
+                        className="nav nav-tabs nav-tabs-pf"
                         type="button"
                         onClick={() => filterClearValues([])}
                       >
