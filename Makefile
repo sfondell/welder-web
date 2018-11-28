@@ -2,7 +2,7 @@
 VERSION=$(shell $(CURDIR)/rpmversion.sh | cut -d - -f 1)
 RELEASE=$(shell $(CURDIR)/rpmversion.sh | cut -d - -f 2)
 PACKAGE_NAME := $(shell awk '/"name":/ {gsub(/[",]/, "", $$2); print $$2}' package.json)
-TEST_OS ?= rhel-7-6
+TEST_OS ?= fedora-29
 BROWSER ?= firefox
 export TEST_OS BROWSER
 VM_IMAGE=$(CURDIR)/test/images/$(TEST_OS)
@@ -31,11 +31,13 @@ npm-install:
 install: all
 	mkdir -p /usr/share/cockpit/welder
 	cp -r public/* /usr/share/cockpit/welder
+	mkdir -p /usr/share/metainfo/
+	cp io.weldr.cockpit-composer.metainfo.xml /usr/share/metainfo/
 
 dist-gzip: NODE_ENV=production
 dist-gzip: all $(PACKAGE_NAME).spec
 	mkdir -p $(PACKAGE_NAME)-$(VERSION)
-	cp -r public/ LICENSE.txt README.md $(PACKAGE_NAME).spec $(PACKAGE_NAME)-$(VERSION)
+	cp -r public/ LICENSE.txt README.md $(PACKAGE_NAME).spec io.weldr.cockpit-composer.metainfo.xml $(PACKAGE_NAME)-$(VERSION)
 	tar -czf $(PACKAGE_NAME)-$(VERSION).tar.gz $(PACKAGE_NAME)-$(VERSION)
 	rm -rf $(PACKAGE_NAME)-$(VERSION)
 
@@ -141,5 +143,10 @@ bots:
 	git fetch --depth=1 https://github.com/cockpit-project/cockpit.git
 	git checkout --force FETCH_HEAD -- bots/
 	git reset bots
+
+# The po-refresh bot expects these specific Makefile targets
+update-po:
+upload-pot: po-push
+download-po: po-pull
 
 .PHONY: tag welder-web.spec cockpit-composer.spec local-clean vm check
