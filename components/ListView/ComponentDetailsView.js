@@ -300,8 +300,8 @@ class ComponentDetailsView extends React.Component {
             </form>
           </div>}
         <div>
-          <Tabs id="blueprint-tabs">
-            <Tab eventKey="details" title="Details">
+          <Nav id="blueprint-tabs" bsClass="nav nav-tabs nav-tabs-pf" onSelect={Selected}>
+            <NavItem eventKey="details" title="Details">
               <h4 className="cmpsr-title">{this.state.componentData.summary}</h4>
               <p>{this.state.componentData.description}</p>
               <dl className="dl-horizontal">
@@ -326,12 +326,12 @@ class ComponentDetailsView extends React.Component {
                   </dd>) ||
                   <dd>&nbsp;</dd>}
               </dl>
-            </Tab>
+            </NavItem>
             {this.state.componentData.components &&
-              <Tab eventKey="components" title="Components">
+              <NavItem eventKey="components" title="Components">
                 <p><FormattedMessage defaultMessage="Components" /></p>
-              </Tab>}
-            <Tab
+              </NavItem>}
+            <NavItem
               eventKey="dependencies"
               title={<LabelWithBadge title={formatMessage(messages.dependencies)} badge={this.state.dependencies.length} />}
             >
@@ -342,8 +342,8 @@ class ComponentDetailsView extends React.Component {
                 handleComponentDetails={this.props.handleComponentDetails}
                 componentDetailsParent={component}
               />
-            </Tab>
-          </Tabs>
+            </NavItem>
+          </Nav>
         </div>
       </div>
     );

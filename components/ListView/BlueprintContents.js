@@ -60,8 +60,8 @@ class BlueprintContents extends React.Component {
                 {this.props.children}
               </div>
               ||
-              <Tabs id="basic-tabs-pf">
-                <Tab
+              <Nav id="blueprint-tabs" bsClass="nav nav-tabs nav-tabs-pf" onSelect={Selected}>
+                <NavItem
                   eventKey="selected-components"
                   title={<LabelWithBadge title={formatMessage(messages.selectedTabTitle)} badge={components.length} />}
                 >
@@ -71,7 +71,7 @@ class BlueprintContents extends React.Component {
                       message={formatMessage(messages.emptyStateNoResultsMessage)}
                     >
                       <button
-                        className="nav nav-tabs nav-tabs-pf"
+                        className="btn btn-link btn-lg"
                         type="button"
                         onClick={() => filterClearValues([])}
                       >
@@ -92,8 +92,8 @@ class BlueprintContents extends React.Component {
                       ))}
                     </ListView>
                   }
-                </Tab>
-                <Tab
+                </NavItem>
+                <NavItem
                   eventKey="dependencies"
                   title={<LabelWithBadge title={formatMessage(messages.dependenciesTabTitle)} badge={dependencies.length} />}
                 >
@@ -103,7 +103,7 @@ class BlueprintContents extends React.Component {
                       message={formatMessage(messages.emptyStateNoResultsMessage)}
                     >
                       <button
-                        className="nav nav-tabs nav-tabs-pf"
+                        className="btn btn-link btn-lg"
                         type="button"
                         onClick={() => filterClearValues([])}
                       >
@@ -119,8 +119,8 @@ class BlueprintContents extends React.Component {
                       noEditComponent={noEditComponent}
                     />
                   }
-                </Tab>
-              </Tabs>
+                </NavItem>
+              </Nav>
             )
           )
         }
